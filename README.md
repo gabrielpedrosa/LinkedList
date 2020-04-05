@@ -1,2 +1,5 @@
 # lista_tad
-Simulando uma lista
+Gabriel Pedrosa - 132779
+Henrique Herrmann - 134499
+
+AED II
