@@ -1,23 +1,36 @@
 #coding:utf-8
 class Produto(object):
-    def __init__(self):
-        print("Incializando......")
-
-    def criar(self):
-        print("Criando Produto...")
-        self.list = []
+    def __init__(self, size):
+        print("Criando Lista...")
+        self.size = size
+        self.list = [None]*size
     
-    def inserir(self):
+    def inserir(self, position, produto):
         print("Inserindo Produto...")
+        self.list[position] = produto
     
-    def remover(self):
+    def remover(self, position):
         print("Removendo Produto...")
+        self.list[position] = None
     
-    def retornar(self):
-        print("Retornar Nome do Produto")
+    def retornar(self, produto):
+        print("Retornar Nome do Produto...")
+        cont = 0
+        for i in self.list:
+            if(i == produto):
+                print(cont, i)
+            cont += 1
     
     def buscar(self):
         print("Buscar posição do Produto")
     
-    def imprimir(self):
-        print("Imprimir todos os Valores")
+    def imprimir_lista(self):
+        print("Imprimindo valor...")
+        cont = 0
+        for i in self.list:
+            if (i != None):
+                print(cont, i)
+            else:
+                print(cont, "Vazio")
+            cont += 1
+        
