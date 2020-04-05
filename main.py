@@ -10,11 +10,11 @@ class main(object):
                 size = int(input("Informe o tamanho da lista:\n"))
                 p.criar(size)
             elif(menu == 2):
-                position = int(input("Informe a posição na lista que deseja inserir:\n"))
+                position = int(input("Informe a posição do produto que deseja inserir na lista :\n"))
                 produto = input("Informe o nome do produto:\n")
                 p.inserir(position, produto)
             elif(menu == 3):
-                position = int(input("Informe a posição na lista que deseja remover:\n"))
+                position = int(input("Informe a posição do produto que deseja remover da lista :\n"))
                 p.remover(position) 
             elif(menu == 4):
                 produto = input("Informe o nome do produto que deseja encontrar:\n")
