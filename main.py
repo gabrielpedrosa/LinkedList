@@ -1,21 +1,29 @@
 #coding:utf-8
+import produto as prod 
 class main(object):
     def __init__(self):
+        p = prod.Produto()
         continuar = True
         while(continuar):
-            menu = int(input("Escolha uma opção!\n 1 - Criar um produto\n 2 - Inserir um produto\n 3 - Remover um produto\n 4 - Retornar um produto\n 5 - Buscar um produto\n 6 - Imprimir a Lista\n 7 - Sair\n"))
+            menu = int(input("Escolha uma opção!\n 1 - Criar a lista\n 2 - Inserir um produto\n 3 - Remover um produto\n 4 - Retornar um produto\n 5 - Buscar um produto\n 6 - Imprimir a Lista\n 7 - Sair\n"))
             if(menu == 1):
-                print("1")
+                size = int(input("Informe o tamanho da lista:\n"))
+                p.criar(size)
             elif(menu == 2):
-                print("2")
+                position = int(input("Informe a posição na lista que deseja inserir:\n"))
+                produto = input("Informe o nome do produto:\n")
+                p.inserir(position, produto)
             elif(menu == 3):
-                print("3") 
+                position = int(input("Informe a posição na lista que deseja remover:\n"))
+                p.remover(position) 
             elif(menu == 4):
-                print("4") 
+                produto = input("Informe o nome do produto que deseja encontrar:\n")
+                p.retornar(produto) 
             elif(menu == 5):
-                print("5") 
+                produto = input("Informe o nome do produto que deseja buscar:\n")
+                p.buscar(produto) 
             elif(menu == 6):
-                print("6") 
+                p.imprimir()
             elif(menu == 7):
                 continuar = False 
 
