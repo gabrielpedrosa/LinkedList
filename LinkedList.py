@@ -30,7 +30,8 @@ class LinkedList:
             allowed = True
             other = False
             
-            if(self._isPositionValid(position)):
+            if not(self._isPositionValidToAdd(position)):
+                print("opa")
                 confirm_1 = int(input("Já existe um produto nessa posição.\nDeseja Sobreescrever: 1 - Sim, 2 - Não\n"))
             
                 if confirm_1 == 1:
@@ -46,10 +47,10 @@ class LinkedList:
                     else:
                         allowed = False
                         
-                if allowed and not(other):
-                    self._insertOverwriting(position, element)
-                elif not(allowed) and not(other):
-                    print("element not inserted!")
+            if allowed and not(other):
+                self._insertOverwriting(position, element)
+            elif not(allowed) and not(other):
+                print("element not inserted!")
             
         except Exception as ex:
             print(f"cannot insert element! message: {ex}")
@@ -79,12 +80,14 @@ class LinkedList:
         except:
             raise Exception("cannot insert on nextPosition!")
     
-    def _isPositionValid(self, position: int) -> bool:
+    def _isPositionValidToAdd(self, position: int) -> bool:
         try:
-            return self.list[position] != None
+            self._raiseInvalidList()
+            
+            return self.list[position] == None
         except Exception as ex:
             print(f"cannot validate position! message: {ex}")
-            return False
+        return False
     
     def remove(self, position) -> bool:
         '''
@@ -109,45 +112,50 @@ class LinkedList:
         try:
             self._raiseEmpty()
             
-            return self.list[position]
+            element = self.list[position]
+            if(element == None):
+                raise Exception("list position is empty!")
+            else:
+                return self.list[position]
+            
         except Exception as ex:
-            print(f"cannot get element at position '{position}'! message: {ex}")
+            return ex
     
-    def search(self, elementName) -> int:
+    def search(self, elementSearch) -> int:
         '''
         Retorna a posição do elemento na lista.
         
-        :param elementName: nome do elemento.
+        :param elementSearch: elemento a ser procurado.
         :return: (int) posição do elemento.
         '''
         try:
-            print("returning element position...")
             cont = 0
             
             for element in self.list:
                 if(element != None):
-                    if(element.name == elementName):
+                    if(element == elementSearch):
                         return cont 
                        
                 cont += 1
-            print("no result found on list!")
+            raise Exception(f"no result found of '{elementSearch}' on list!")
         except Exception as ex:
-            print(f"cannot search element '{elementName}'! message: {ex}")
+            return ex
     
     def show(self) -> None:
         '''
         Exibe os elementos da lista.
         '''
         try:
+            self._raiseInvalidList()
             self._raiseEmpty()
             
             cont = 0
             
             for element in self.list:
                 if(element == None):
-                    print(f"{cont}. {self.element}")
-                else:
                     print(f"{cont}. ")
+                else:
+                    print(f"{cont}. {element}")
                     
                 cont += 1
                 
@@ -175,11 +183,26 @@ class LinkedList:
         
         :return: (bool) True, está vazia.
         '''
-        return self.size <= 0 or self.list == None
+        return self.size <= 0 
     
     def _raiseEmpty(self) -> None:
         '''
         Lança uma exceção de lista vazia.
         '''
-        if(self.isEmpty):
+        if(self.isEmpty()):
             raise Exception("list is empty!")
+    
+    def isValidList(self) -> None:
+        '''
+        Retorna se a lista é valida.
+        
+        :return: (bool) True, é válida.
+        '''
+        return self.list == None
+    
+    def _raiseInvalidList(self) -> None:
+        '''
+        Lança uma exceção de lista inválida.
+        '''
+        if(self.isValidList()):
+            raise Exception("list is not created!")
