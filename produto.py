@@ -3,7 +3,7 @@ class Produto(object):
     def __init__(self):
         print("Inicilizando...")
         
-    def criar(self, size):
+    #def criar(self, size):
         print("Criando Lista...")
         self.size = size
         self.list = [None]*size
@@ -44,12 +44,12 @@ class Produto(object):
         else:
             print("Lista Cheia!")
 
-    def remover(self, position):
+    #def remover(self, position):
         print("Removendo Produto...")
         self.list[position] = None
         print("Removido")
     
-    def retornar(self, produto):
+    # def retornar(self, produto):
         print("Retornar Nome do Produto...")
         cont = 0
         for i in self.list:
@@ -57,7 +57,7 @@ class Produto(object):
                 print("Posição: "+str(cont)+" Produto: "+str(i))
             cont += 1
     
-    def buscar(self, produto):
+    # def buscar(self, produto):
         print("Buscar posição do Produto")
         cont = 0
         for i in self.list:
@@ -65,7 +65,7 @@ class Produto(object):
                 print("Posição: "+str(cont))
             cont += 1
     
-    def imprimir(self):
+    # def imprimir(self):
         print("Imprimindo valor...")
         cont = 0
         for i in self.list:
