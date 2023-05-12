@@ -2,28 +2,34 @@
 from Product import Product
 
 class LinkedList:
-    def __init__(self) -> None:
-        self.size = 0.0
+    def __init__(self, size: int = 0.0) -> None:
+        self.size = size
         self.list = None
         self.increase = None
+        self.create()
         
-    def create(self, size = 0) -> None:
+    def create(self) -> None:
         '''
         Cria uma lista encadeada com o tamanho indicado.
         
         :param size: (int) tamanho da lista encadeada.
         '''
         try:
-            if(size <= 0):
+            if(self.size <= 0):
                 raise Exception("size must be greater than 0!")
             
-            self.size = size
             self.list = [None]*self.size
             self.increase = 0
         except Exception as ex:
             print(f"cannot create linked list with size '{self.size}'! message: {ex}")
     
-    def insert(self, position, element) -> None:
+    def insert(self, position: int, element: any) -> None:
+        '''
+        Inserir um valor na lista.
+        
+        :param position: (int) posição da lista onde o elemento vai ser inserido.
+        :param element: (any) elemento que sera inserido na lista.
+        '''
         try:
             self._raiseFull()
             
@@ -55,14 +61,26 @@ class LinkedList:
         except Exception as ex:
             print(f"cannot insert element! message: {ex}")
     
-    def _insertOverwriting(self, position, element) -> None:
+    def _insertOverwriting(self, position: int, element: any) -> None:
+        '''
+        Inserir sobrescrevendo o valor anterior.
+        
+        :param position: (int) posição que o elemento será inserido.
+        :param element: (any) elemento a ser inserido.
+        '''
         try:
             self.list[position] = element
             self.increase += 1
         except:
             raise Exception(f"cannot insert overwriting value!")
     
-    def _insertNextPosition(self, position, element) -> None:
+    def _insertNextPosition(self, position: int, element: any) -> None:
+        '''
+        Insere na próxima posição vazia da lista.
+        
+        :param position: (int) posição do elemento.
+        :param element: (any) elemento a ser inserido.
+        '''
         try:
             cont = position
             
@@ -81,6 +99,12 @@ class LinkedList:
             raise Exception("cannot insert on nextPosition!")
     
     def _isPositionValidToAdd(self, position: int) -> bool:
+        '''
+        Verifica se existe algo na posição selecionada para adicionar.
+        
+        :param position: (int) posição na lista.
+        :return: (bool) True, não existe e pode adicionar.
+        '''
         try:
             self._raiseInvalidList()
             
@@ -206,3 +230,32 @@ class LinkedList:
         '''
         if(self.isValidList()):
             raise Exception("list is not created!")
+        
+
+if __name__ == "__main__":
+    linkedList = None
+    
+    keepGoing = True
+    
+    while keepGoing:
+        menu = int(input("Escolha uma opção!\n 1 - Criar uma lista\n 2 - Inserir um elemento\n 3 - Remover um elemento por posição\n 4 - Retornar um elemento\n 5 - Buscar por nome do elemento\n 6 - Exibir lista encadeada\n 7 - Sair\n"))
+        if(menu == 1):
+            size = int(input("Informe o tamanho da lista:\n"))
+            linkedList = LinkedList(size)
+        elif(menu == 2):
+            position = int(input("Informe a posição do elemento que deseja inserir na lista:\n"))
+            productName = input("Informe o nome do produto:\n")
+            linkedList.insert(position, productName)
+        elif(menu == 3):
+            position = int(input("Informe a posição do elemento que deseja remover da lista:\n"))
+            linkedList.remove(position) 
+        elif(menu == 4):
+            position = int(input("Informe a posição da lista que deseja buscar:\n"))
+            print(linkedList.get(position))
+        elif(menu == 5):
+            productName = input("Informe o nome do produto que deseja buscar:\n")
+            print(linkedList.search(productName))
+        elif(menu == 6):
+            linkedList.show()
+        elif(menu == 7):
+            keepGoing = False 
