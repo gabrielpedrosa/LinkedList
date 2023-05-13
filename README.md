@@ -11,7 +11,7 @@
 </h2>
 
 <h2 align="center"> 
-    LinkedList finalizado! :pencil2: :zap:
+    LinkedList finalizado! :star2: :star2:
 </h2>
 
 ## Sobre o projeto
