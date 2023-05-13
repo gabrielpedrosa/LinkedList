@@ -1,6 +1,6 @@
 # Lista Encadeada
-@author Gabriel Pedrosa - 132779
-@author Henrique Herrmann - 134499
+@author Gabriel Pedrosa <br>
+@author Henrique Herrmann <br>
 
 <h4></h4>
 
