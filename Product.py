@@ -13,6 +13,9 @@ class Product:
         
     def __repr__(self) -> str:
         return f"Product(Name: '{self.name}', Value: '{self.value}')"
+    
+    def toString(self) -> str:
+        return self.name
 
 if __name__ == "__main__":
     p = Product("chair")

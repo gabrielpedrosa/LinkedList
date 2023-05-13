@@ -1,5 +1,6 @@
 #coding: utf-8
 from Product import Product
+from inspect import ismethod
 
 class LinkedList:
     def __init__(self, size: int = 0.0) -> None:
@@ -151,19 +152,24 @@ class LinkedList:
         
         :param elementSearch: elemento a ser procurado.
         :return: (int) posição do elemento.
+        
+        OBS: se o objeto possuir um método toString(), a comparação será feita com o resultado desse método.
         '''
         try:
             cont = 0
             
             for element in self.list:
                 if(element != None):
-                    if(element == elementSearch):
-                        return cont 
-                       
+                    if(self.method_exists(element, "toString")):
+                        if(element.toString() == elementSearch):
+                            return cont 
+                    else:
+                        if(element == elementSearch):
+                            return cont
                 cont += 1
-            raise Exception(f"no result found of '{elementSearch}' on list!")
-        except Exception as ex:
-            return ex
+            return -1
+        except:
+            raise Exception(f"cannot search element '{elementSearch}'!")
     
     def show(self) -> None:
         '''
@@ -185,6 +191,9 @@ class LinkedList:
                 
         except Exception as ex:
             print(f"cannot show list! message: {ex}")
+            
+    def method_exists(self, instance, method):
+        return hasattr(instance, method) and ismethod(getattr(instance, method))
     
     def isFull(self) -> bool:
         '''
@@ -245,10 +254,12 @@ if __name__ == "__main__":
         elif(menu == 2):
             position = int(input("Informe a posição do elemento que deseja inserir na lista:\n"))
             productName = input("Informe o nome do produto:\n")
-            linkedList.insert(position, productName)
+            productValue = float(input("Informe o valor do produto:\n"))
+            linkedList.insert(position, Product(productName, productValue))
         elif(menu == 3):
             position = int(input("Informe a posição do elemento que deseja remover da lista:\n"))
-            linkedList.remove(position) 
+            linkedList.remove(position)
+            linkedList.show()
         elif(menu == 4):
             position = int(input("Informe a posição da lista que deseja buscar:\n"))
             print(linkedList.get(position))
